@@ -1,0 +1,1 @@
+export { MendPage } from './MendPage';
