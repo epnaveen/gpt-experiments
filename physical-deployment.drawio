@@ -1,5 +1,5 @@
-<mxfile host="app.diagrams.net" modified="2025-08-08T00:05:00.000Z" agent="AI-GPT-5" version="22.0.8" type="device">
-  <diagram id="aws-physical-deployment" name="AWS Physical Deployment Model">
+<mxfile host="app.diagrams.net" modified="2025-08-08T00:12:00.000Z" agent="AI-GPT-5" version="22.0.8" type="device">
+  <diagram id="aws-physical-deployment" name="AWS Physical Deployment Model (Neat)">
     <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1600" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
@@ -7,270 +7,228 @@
 
         <!-- AWS Cloud (Account) -->
         <mxCell id="aws_cloud" value="AWS Cloud (Account)" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.aws_cloud;labelPosition=left;verticalLabelPosition=top;align=center;verticalAlign=top;fontSize=16;spacingTop=8;" vertex="1" parent="1">
-          <mxGeometry x="40" y="80" width="2200" height="1300" as="geometry"/>
+          <mxGeometry x="40" y="60" width="2240" height="1320" as="geometry"/>
         </mxCell>
 
-        <!-- Internet + DNS + Edge -->
+        <!-- Top Row: Internet -> Route53 -> CloudFront -> WAF -->
         <mxCell id="internet" value="Internet" style="shape=mxgraph.aws4.internet_alt1;html=1;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="40" y="40" width="100" height="80" as="geometry"/>
+          <mxGeometry x="60" y="30" width="110" height="80" as="geometry"/>
         </mxCell>
         <mxCell id="route53" value="Amazon Route 53" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_53;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="170" y="40" width="140" height="80" as="geometry"/>
+          <mxGeometry x="210" y="30" width="150" height="80" as="geometry"/>
         </mxCell>
         <mxCell id="cloudfront" value="Amazon CloudFront" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudfront;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="330" y="40" width="160" height="80" as="geometry"/>
+          <mxGeometry x="390" y="30" width="170" height="80" as="geometry"/>
         </mxCell>
         <mxCell id="waf" value="AWS WAF (Web ACL)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.waf;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="510" y="40" width="160" height="80" as="geometry"/>
+          <mxGeometry x="590" y="30" width="160" height="80" as="geometry"/>
         </mxCell>
 
         <!-- VPC -->
         <mxCell id="vpc" value="VPC 10.0.0.0/16" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.vpc;labelPosition=left;verticalLabelPosition=top;align=center;verticalAlign=top;fontSize=15;spacingTop=8;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="40" y="160" width="2100" height="1100" as="geometry"/>
+          <mxGeometry x="60" y="140" width="2120" height="1120" as="geometry"/>
         </mxCell>
 
         <!-- Internet Gateway -->
         <mxCell id="igw" value="Internet Gateway" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.internet_gateway;" vertex="1" parent="vpc">
-          <mxGeometry x="1860" y="30" width="180" height="80" as="geometry"/>
+          <mxGeometry x="1920" y="20" width="180" height="80" as="geometry"/>
         </mxCell>
 
-        <!-- AZ A -->
+        <!-- Availability Zones neatly side-by-side -->
         <mxCell id="az_a" value="Availability Zone A" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.availability_zone;labelPosition=left;verticalLabelPosition=top;align=center;verticalAlign=top;spacingTop=8;" vertex="1" parent="vpc">
-          <mxGeometry x="40" y="100" width="1000" height="940" as="geometry"/>
+          <mxGeometry x="80" y="100" width="1020" height="960" as="geometry"/>
         </mxCell>
-
-        <!-- AZ B -->
         <mxCell id="az_b" value="Availability Zone B" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.availability_zone;labelPosition=left;verticalLabelPosition=top;align=center;verticalAlign=top;spacingTop=8;" vertex="1" parent="vpc">
-          <mxGeometry x="1060" y="100" width="1000" height="940" as="geometry"/>
+          <mxGeometry x="1140" y="100" width="1020" height="960" as="geometry"/>
         </mxCell>
 
-        <!-- Public Subnets -->
+        <!-- Public Subnets row -->
         <mxCell id="pub_a" value="Public Subnet A\n10.0.1.0/24" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.public_subnet;" vertex="1" parent="az_a">
-          <mxGeometry x="40" y="60" width="920" height="240" as="geometry"/>
+          <mxGeometry x="40" y="60" width="940" height="220" as="geometry"/>
         </mxCell>
         <mxCell id="pub_b" value="Public Subnet B\n10.0.2.0/24" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.public_subnet;" vertex="1" parent="az_b">
-          <mxGeometry x="40" y="60" width="920" height="240" as="geometry"/>
+          <mxGeometry x="40" y="60" width="940" height="220" as="geometry"/>
         </mxCell>
 
-        <!-- Private App Subnets -->
-        <mxCell id="app_a" value="Private App Subnet A\n10.0.11.0/24" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.private_subnet;" vertex="1" parent="az_a">
-          <mxGeometry x="40" y="320" width="920" height="300" as="geometry"/>
-        </mxCell>
-        <mxCell id="app_b" value="Private App Subnet B\n10.0.12.0/24" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.private_subnet;" vertex="1" parent="az_b">
-          <mxGeometry x="40" y="320" width="920" height="300" as="geometry"/>
+        <!-- Place ALB centered above app tier for clean vertical drops -->
+        <mxCell id="alb" value="Application Load Balancer (HTTPS)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.application_load_balancer;" vertex="1" parent="vpc">
+          <mxGeometry x="1010" y="160" width="220" height="120" as="geometry"/>
         </mxCell>
 
-        <!-- Private DB Subnets -->
-        <mxCell id="db_a" value="Private DB Subnet A\n10.0.21.0/24" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.private_subnet;" vertex="1" parent="az_a">
-          <mxGeometry x="40" y="640" width="920" height="300" as="geometry"/>
+        <!-- Network Firewall left; NAT right in each public subnet -->
+        <mxCell id="netfw_a" value="Network Firewall" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.network_firewall;" vertex="1" parent="pub_a">
+          <mxGeometry x="60" y="120" width="200" height="80" as="geometry"/>
         </mxCell>
-        <mxCell id="db_b" value="Private DB Subnet B\n10.0.22.0/24" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.private_subnet;" vertex="1" parent="az_b">
-          <mxGeometry x="40" y="640" width="920" height="300" as="geometry"/>
-        </mxCell>
-
-        <!-- NAT Gateways in Public Subnets -->
         <mxCell id="nat_a" value="NAT Gateway" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.nat_gateway;" vertex="1" parent="pub_a">
-          <mxGeometry x="40" y="120" width="140" height="80" as="geometry"/>
+          <mxGeometry x="760" y="120" width="140" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="netfw_b" value="Network Firewall" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.network_firewall;" vertex="1" parent="pub_b">
+          <mxGeometry x="60" y="120" width="200" height="80" as="geometry"/>
         </mxCell>
         <mxCell id="nat_b" value="NAT Gateway" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.nat_gateway;" vertex="1" parent="pub_b">
-          <mxGeometry x="40" y="120" width="140" height="80" as="geometry"/>
+          <mxGeometry x="760" y="120" width="140" height="80" as="geometry"/>
         </mxCell>
 
-        <!-- Application Load Balancer in Public Subnets -->
-        <mxCell id="alb" value="ALB (HTTPS)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.application_load_balancer;" vertex="1" parent="vpc">
-          <mxGeometry x="980" y="180" width="200" height="120" as="geometry"/>
+        <!-- App Subnets row -->
+        <mxCell id="app_a" value="Private App Subnet A\n10.0.11.0/24" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.private_subnet;" vertex="1" parent="az_a">
+          <mxGeometry x="40" y="320" width="940" height="300" as="geometry"/>
+        </mxCell>
+        <mxCell id="app_b" value="Private App Subnet B\n10.0.12.0/24" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.private_subnet;" vertex="1" parent="az_b">
+          <mxGeometry x="40" y="320" width="940" height="300" as="geometry"/>
         </mxCell>
 
-        <!-- AWS Network Firewall in Inspection Subnet (optional) -->
-        <mxCell id="netfw_a" value="AWS Network Firewall" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.network_firewall;" vertex="1" parent="pub_a">
-          <mxGeometry x="220" y="120" width="200" height="80" as="geometry"/>
+        <!-- EC2 instances aligned below ALB for straight lines -->
+        <mxCell id="ec2_a1" value="EC2 (App)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" vertex="1" parent="app_a">
+          <mxGeometry x="260" y="70" width="130" height="80" as="geometry"/>
         </mxCell>
-        <mxCell id="netfw_b" value="AWS Network Firewall" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.network_firewall;" vertex="1" parent="pub_b">
-          <mxGeometry x="220" y="120" width="200" height="80" as="geometry"/>
+        <mxCell id="ec2_a2" value="EC2 (App)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" vertex="1" parent="app_a">
+          <mxGeometry x="430" y="150" width="130" height="80" as="geometry"/>
         </mxCell>
-
-        <!-- EC2 Auto Scaling group in App subnets -->
-        <mxCell id="asg_a" value="EC2 Auto Scaling" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.auto_scaling;" vertex="1" parent="app_a">
-          <mxGeometry x="60" y="80" width="170" height="80" as="geometry"/>
+        <mxCell id="ec2_b1" value="EC2 (App)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" vertex="1" parent="app_b">
+          <mxGeometry x="380" y="70" width="130" height="80" as="geometry"/>
         </mxCell>
-        <mxCell id="ec2_a1" value="EC2" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" vertex="1" parent="app_a">
-          <mxGeometry x="270" y="60" width="120" height="80" as="geometry"/>
-        </mxCell>
-        <mxCell id="ec2_a2" value="EC2" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" vertex="1" parent="app_a">
-          <mxGeometry x="420" y="120" width="120" height="80" as="geometry"/>
-        </mxCell>
-        <mxCell id="ec2_b1" value="EC2" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" vertex="1" parent="app_b">
-          <mxGeometry x="270" y="60" width="120" height="80" as="geometry"/>
-        </mxCell>
-        <mxCell id="ec2_b2" value="EC2" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" vertex="1" parent="app_b">
-          <mxGeometry x="420" y="120" width="120" height="80" as="geometry"/>
+        <mxCell id="ec2_b2" value="EC2 (App)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" vertex="1" parent="app_b">
+          <mxGeometry x="540" y="150" width="130" height="80" as="geometry"/>
         </mxCell>
 
-        <!-- Security Groups -->
-        <mxCell id="sg_alb" value="SG-ALB\n(Allow 443 from Internet, to EC2 443)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.security_group;" vertex="1" parent="vpc">
-          <mxGeometry x="1200" y="180" width="200" height="90" as="geometry"/>
+        <!-- VPC Interface Endpoints inside App subnets for short dashed lines -->
+        <mxCell id="vpce_secrets_a" value="Interface VPC Endpoint\n(Secrets Manager)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.interface_vpc_endpoint;" vertex="1" parent="app_a">
+          <mxGeometry x="720" y="170" width="200" height="90" as="geometry"/>
         </mxCell>
-        <mxCell id="sg_app" value="SG-App\n(Allow 443 from ALB; egress 443/80)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.security_group;" vertex="1" parent="vpc">
-          <mxGeometry x="820" y="520" width="220" height="90" as="geometry"/>
-        </mxCell>
-        <mxCell id="sg_db" value="SG-DB\n(Allow 5432 from SG-App)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.security_group;" vertex="1" parent="vpc">
-          <mxGeometry x="1540" y="900" width="200" height="90" as="geometry"/>
+        <mxCell id="vpce_secrets_b" value="Interface VPC Endpoint\n(Secrets Manager)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.interface_vpc_endpoint;" vertex="1" parent="app_b">
+          <mxGeometry x="720" y="170" width="200" height="90" as="geometry"/>
         </mxCell>
 
-        <!-- RDS Multi-AZ in DB subnets -->
+        <!-- DB Subnets row -->
+        <mxCell id="db_a" value="Private DB Subnet A\n10.0.21.0/24" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.private_subnet;" vertex="1" parent="az_a">
+          <mxGeometry x="40" y="640" width="940" height="300" as="geometry"/>
+        </mxCell>
+        <mxCell id="db_b" value="Private DB Subnet B\n10.0.22.0/24" style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.private_subnet;" vertex="1" parent="az_b">
+          <mxGeometry x="40" y="640" width="940" height="300" as="geometry"/>
+        </mxCell>
+
         <mxCell id="rds_primary" value="Amazon RDS (Primary)\nPostgreSQL" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.rds_instance;" vertex="1" parent="db_a">
-          <mxGeometry x="280" y="100" width="180" height="100" as="geometry"/>
+          <mxGeometry x="360" y="100" width="180" height="100" as="geometry"/>
         </mxCell>
         <mxCell id="rds_standby" value="Amazon RDS (Standby)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.rds_instance;" vertex="1" parent="db_b">
-          <mxGeometry x="280" y="100" width="180" height="100" as="geometry"/>
-        </mxCell>
-        <mxCell id="rds_az" value="RDS Subnet Group" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.rds_db_instance;" vertex="1" parent="vpc">
-          <mxGeometry x="1500" y="760" width="180" height="90" as="geometry"/>
+          <mxGeometry x="360" y="100" width="180" height="100" as="geometry"/>
         </mxCell>
 
-        <!-- Secrets Manager and VPC Endpoints -->
-        <mxCell id="secrets_mgr" value="AWS Secrets Manager" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.secrets_manager;" vertex="1" parent="vpc">
-          <mxGeometry x="980" y="980" width="200" height="100" as="geometry"/>
+        <!-- Security Groups (legend style, no connecting lines to avoid clutter) -->
+        <mxCell id="sg_alb" value="SG-ALB: allow 443 from Internet\nTargets: SG-App (443)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.security_group;opacity=90;" vertex="1" parent="vpc">
+          <mxGeometry x="1260" y="160" width="210" height="90" as="geometry"/>
         </mxCell>
-        <mxCell id="vpce_secrets_a" value="Interface VPC Endpoint\n(com.amazonaws.secretsmanager)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.interface_vpc_endpoint;" vertex="1" parent="db_a">
-          <mxGeometry x="520" y="200" width="200" height="90" as="geometry"/>
+        <mxCell id="sg_app" value="SG-App: allow 443 from SG-ALB\negress 443/80" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.security_group;opacity=90;" vertex="1" parent="vpc">
+          <mxGeometry x="820" y="500" width="220" height="90" as="geometry"/>
         </mxCell>
-        <mxCell id="vpce_secrets_b" value="Interface VPC Endpoint\n(Secrets Manager)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.interface_vpc_endpoint;" vertex="1" parent="db_b">
-          <mxGeometry x="520" y="200" width="200" height="90" as="geometry"/>
-        </mxCell>
-        <mxCell id="vpce_s3" value="Gateway VPC Endpoint\n(S3)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.gateway_vpc_endpoint;" vertex="1" parent="vpc">
-          <mxGeometry x="1800" y="1080" width="200" height="100" as="geometry"/>
+        <mxCell id="sg_db" value="SG-DB: allow 5432 from SG-App" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.security_group;opacity=90;" vertex="1" parent="vpc">
+          <mxGeometry x="1560" y="880" width="210" height="90" as="geometry"/>
         </mxCell>
 
-        <!-- Observability and governance -->
+        <!-- Regional services (right), minimal edges to avoid crossings) -->
+        <mxCell id="secrets_mgr" value="AWS Secrets Manager" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.secrets_manager;" vertex="1" parent="aws_cloud">
+          <mxGeometry x="1960" y="520" width="200" height="100" as="geometry"/>
+        </mxCell>
         <mxCell id="cloudwatch" value="Amazon CloudWatch" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudwatch;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="720" y="40" width="160" height="80" as="geometry"/>
+          <mxGeometry x="1780" y="30" width="170" height="80" as="geometry"/>
         </mxCell>
         <mxCell id="cloudtrail" value="AWS CloudTrail" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudtrail;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="900" y="40" width="160" height="80" as="geometry"/>
+          <mxGeometry x="1960" y="30" width="170" height="80" as="geometry"/>
         </mxCell>
         <mxCell id="config" value="AWS Config" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.config;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="1080" y="40" width="160" height="80" as="geometry"/>
+          <mxGeometry x="2140" y="30" width="150" height="80" as="geometry"/>
         </mxCell>
-
-        <!-- IAM and SSM -->
-        <mxCell id="iam" value="IAM Roles/Policies" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iam;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="1260" y="40" width="160" height="80" as="geometry"/>
+        <mxCell id="iam" value="IAM" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.iam;" vertex="1" parent="aws_cloud">
+          <mxGeometry x="1620" y="30" width="140" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="kms" value="AWS KMS" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.kms;" vertex="1" parent="aws_cloud">
+          <mxGeometry x="1460" y="30" width="140" height="80" as="geometry"/>
         </mxCell>
         <mxCell id="ssm" value="AWS Systems Manager\n(Session Manager)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.systems_manager;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="1440" y="40" width="200" height="80" as="geometry"/>
+          <mxGeometry x="1300" y="30" width="150" height="80" as="geometry"/>
         </mxCell>
-        <mxCell id="kms" value="AWS KMS (CMK)" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.kms;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="1660" y="40" width="160" height="80" as="geometry"/>
-        </mxCell>
-
-        <!-- Route Tables (labels) -->
-        <mxCell id="rt_public" value="Public Route Table\n0.0.0.0/0 -> IGW" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_table;" vertex="1" parent="vpc">
-          <mxGeometry x="1840" y="220" width="200" height="90" as="geometry"/>
-        </mxCell>
-        <mxCell id="rt_app" value="Private App Route Table\n0.0.0.0/0 -> NAT" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_table;" vertex="1" parent="vpc">
-          <mxGeometry x="1840" y="360" width="200" height="90" as="geometry"/>
-        </mxCell>
-        <mxCell id="rt_db" value="Private DB Route Table\nNo Internet route" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_table;" vertex="1" parent="vpc">
-          <mxGeometry x="1840" y="500" width="200" height="90" as="geometry"/>
-        </mxCell>
-
-        <!-- Edges: Traffic Flow -->
-        <mxCell id="edge_internet_r53" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;" edge="1" parent="aws_cloud" source="internet" target="route53">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="edge_r53_cf" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;" edge="1" parent="aws_cloud" source="route53" target="cloudfront">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="edge_cf_waf" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;" edge="1" parent="aws_cloud" source="cloudfront" target="waf">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="edge_waf_alb" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;" edge="1" parent="aws_cloud" source="waf" target="alb">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- ALB to EC2 in both AZs -->
-        <mxCell id="edge_alb_ec2_a" style="endArrow=block;strokeWidth=2;" edge="1" parent="vpc" source="alb" target="ec2_a1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="edge_alb_ec2_b" style="endArrow=block;strokeWidth=2;" edge="1" parent="vpc" source="alb" target="ec2_b1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- EC2 to RDS -->
-        <mxCell id="edge_ec2_rds_a" style="endArrow=block;strokeWidth=2;" edge="1" parent="vpc" source="ec2_a1" target="rds_primary">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="edge_ec2_rds_b" style="endArrow=block;strokeWidth=2;" edge="1" parent="vpc" source="ec2_b1" target="rds_primary">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- EC2 to Secrets Manager via VPC endpoints -->
-        <mxCell id="edge_ec2_vpce_a" style="dashed=1;dashPattern=5 5;endArrow=block;strokeWidth=2;strokeColor=#ef5350;" edge="1" parent="vpc" source="ec2_a1" target="vpce_secrets_a">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="edge_ec2_vpce_b" style="dashed=1;dashPattern=5 5;endArrow=block;strokeWidth=2;strokeColor=#ef5350;" edge="1" parent="vpc" source="ec2_b1" target="vpce_secrets_b">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="edge_vpce_sm" style="dashed=1;dashPattern=5 5;endArrow=block;strokeWidth=2;strokeColor=#ef5350;" edge="1" parent="vpc" source="vpce_secrets_a" target="secrets_mgr">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- NAT egress from App subnets -->
-        <mxCell id="edge_app_nat_a" style="endArrow=block;strokeWidth=2;" edge="1" parent="vpc" source="app_a" target="nat_a">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="edge_app_nat_b" style="endArrow=block;strokeWidth=2;" edge="1" parent="vpc" source="app_b" target="nat_b">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Public route to IGW -->
-        <mxCell id="edge_pub_igw_a" style="endArrow=block;strokeWidth=2;" edge="1" parent="vpc" source="pub_a" target="igw">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="edge_pub_igw_b" style="endArrow=block;strokeWidth=2;" edge="1" parent="vpc" source="pub_b" target="igw">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Logging/Monitoring edges -->
-        <mxCell id="edge_alb_cw" style="endArrow=block;strokeWidth=2;strokeColor=#26a69a;" edge="1" parent="aws_cloud" source="alb" target="cloudwatch">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="edge_ec2_cw" style="endArrow=block;strokeWidth=2;strokeColor=#26a69a;" edge="1" parent="aws_cloud" source="ec2_a1" target="cloudwatch">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="edge_rds_cw" style="endArrow=block;strokeWidth=2;strokeColor=#26a69a;" edge="1" parent="aws_cloud" source="rds_primary" target="cloudwatch">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Governance edges -->
-        <mxCell id="edge_trail_s3" value="API activity logs" style="dashed=1;dashPattern=5 5;endArrow=block;strokeWidth=2;" edge="1" parent="aws_cloud" source="cloudtrail" target="vpce_s3">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Admin access via SSM -->
         <mxCell id="admin" value="Administrator" style="shape=umlActor;whiteSpace=wrap;html=1;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="1880" y="40" width="60" height="120" as="geometry"/>
+          <mxGeometry x="1200" y="30" width="60" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_admin_ssm" style="dashed=1;dashPattern=4 4;endArrow=block;strokeWidth=2;" edge="1" parent="aws_cloud" source="admin" target="ssm">
+
+        <!-- Route Tables (legend, no connecting edges) -->
+        <mxCell id="rt_public" value="Public RT: 0.0.0.0/0 → IGW" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_table;opacity=90;" vertex="1" parent="vpc">
+          <mxGeometry x="1900" y="220" width="200" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="rt_app" value="App RT: 0.0.0.0/0 → NAT" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_table;opacity=90;" vertex="1" parent="vpc">
+          <mxGeometry x="1900" y="360" width="200" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="rt_db" value="DB RT: no Internet route" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_table;opacity=90;" vertex="1" parent="vpc">
+          <mxGeometry x="1900" y="500" width="200" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- Flows with orthogonal connectors and minimal crossing -->
+        <mxCell id="e_internet_r53" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;endArrow=block;strokeWidth=2;rounded=0;" edge="1" parent="aws_cloud" source="internet" target="route53">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="edge_ssm_ec2" style="dashed=1;dashPattern=4 4;endArrow=block;strokeWidth=2;" edge="1" parent="aws_cloud" source="ssm" target="ec2_a1">
+        <mxCell id="e_r53_cf" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;endArrow=block;strokeWidth=2;rounded=0;" edge="1" parent="aws_cloud" source="route53" target="cloudfront">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_cf_waf" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;endArrow=block;strokeWidth=2;rounded=0;" edge="1" parent="aws_cloud" source="cloudfront" target="waf">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_waf_alb" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;endArrow=block;strokeWidth=2;rounded=0;" edge="1" parent="aws_cloud" source="waf" target="alb">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="690" y="140"/>
+              <mxPoint x="1120" y="140"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ALB straight down to one EC2 per AZ to reduce clutter -->
+        <mxCell id="e_alb_ec2_a" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;endArrow=block;strokeWidth=2;rounded=0;" edge="1" parent="vpc" source="alb" target="ec2_a1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_alb_ec2_b" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;endArrow=block;strokeWidth=2;rounded=0;" edge="1" parent="vpc" source="alb" target="ec2_b1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <!-- Descriptive labels -->
-        <mxCell id="lbl_ports_internet" value="HTTPS 443" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="300" y="130" width="80" height="20" as="geometry"/>
+        <!-- EC2 to RDS primary (two neat orthogonal paths) -->
+        <mxCell id="e_ec2a_rds" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;rounded=0;" edge="1" parent="vpc" source="ec2_a1" target="rds_primary">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="lbl_ports_app_db" value="TCP 5432 (PostgreSQL)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="vpc">
-          <mxGeometry x="1220" y="760" width="160" height="20" as="geometry"/>
+        <mxCell id="e_ec2b_rds" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;rounded=0;" edge="1" parent="vpc" source="ec2_b1" target="rds_primary">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1520" y="760"/>
+              <mxPoint x="560" y="760"/>
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="lbl_iam_roles" value="IAM roles: EC2 instance profile (SecretsManagerReadOnly),\nRDS Enhanced Monitoring role, ALB access logging to S3" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=11;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="40" y="1420" width="1200" height="60" as="geometry"/>
+
+        <!-- EC2 to VPC Endpoints (short dashed within subnets) -->
+        <mxCell id="e_ec2a_vpce" style="edgeStyle=orthogonalEdgeStyle;dashed=1;dashPattern=5 5;endArrow=block;strokeWidth=2;strokeColor=#ef5350;rounded=0;" edge="1" parent="vpc" source="ec2_a1" target="vpce_secrets_a">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="lbl_encrypt" value="Encryption at rest: RDS with KMS CMK; Secrets encrypted with KMS;\nIn-transit TLS: CloudFront/ALB/EC2/RDS" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=11;" vertex="1" parent="aws_cloud">
-          <mxGeometry x="1280" y="1420" width="900" height="60" as="geometry"/>
+        <mxCell id="e_ec2b_vpce" style="edgeStyle=orthogonalEdgeStyle;dashed=1;dashPattern=5 5;endArrow=block;strokeWidth=2;strokeColor=#ef5350;rounded=0;" edge="1" parent="vpc" source="ec2_b1" target="vpce_secrets_b">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- VPC Endpoints to Secrets Manager (to the right, no crossing) -->
+        <mxCell id="e_vpcea_sm" style="edgeStyle=orthogonalEdgeStyle;dashed=1;dashPattern=5 5;endArrow=block;strokeWidth=2;strokeColor=#ef5350;rounded=0;" edge="1" parent="aws_cloud" source="vpce_secrets_a" target="secrets_mgr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_vpceb_sm" style="edgeStyle=orthogonalEdgeStyle;dashed=1;dashPattern=5 5;endArrow=block;strokeWidth=2;strokeColor=#ef5350;rounded=0;" edge="1" parent="aws_cloud" source="vpce_secrets_b" target="secrets_mgr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Admin to SSM only (no crossing), avoid direct lines to EC2 for cleanliness -->
+        <mxCell id="e_admin_ssm" style="edgeStyle=orthogonalEdgeStyle;dashed=1;dashPattern=4 4;endArrow=block;strokeWidth=2;rounded=0;" edge="1" parent="aws_cloud" source="admin" target="ssm">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Minimal legends -->
+        <mxCell id="legend1" value="TLS 443 from Internet → CF → WAF → ALB.\nALB → EC2 (443). EC2 → RDS (5432). Secrets fetched via Interface VPC Endpoints." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;" vertex="1" parent="aws_cloud">
+          <mxGeometry x="60" y="1280" width="1100" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend2" value="Encryption: KMS CMK for RDS & Secrets; TLS in-transit. Logging/metrics: CloudWatch, CloudTrail, Config." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;" vertex="1" parent="aws_cloud">
+          <mxGeometry x="1200" y="1280" width="900" height="60" as="geometry"/>
         </mxCell>
 
       </root>
