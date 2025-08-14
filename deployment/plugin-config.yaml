@@ -1,0 +1,189 @@
+# Red Hat Developer Hub YouTube Video Plugin Configuration
+# This file shows how to configure the plugin in your Red Hat Developer Hub instance
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: youtube-video-plugin-config
+  namespace: redhat-developer-hub
+  labels:
+    app: redhat-developer-hub
+    component: youtube-video-plugin
+data:
+  # Plugin configuration
+  youtube.defaultVideoId: ""
+  youtube.allowCustomUrls: "true"
+  youtube.showControls: "true"
+  youtube.autoplay: "false"
+  youtube.muted: "false"
+  youtube.maxWidth: "1200px"
+  youtube.defaultHeight: "400"
+  youtube.enableTimestamps: "true"
+  youtube.showRelatedVideos: "false"
+  youtube.modestBranding: "true"
+
+---
+# Example environment variables for the plugin
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: youtube-video-plugin-env
+  namespace: redhat-developer-hub
+  labels:
+    app: redhat-developer-hub
+    component: youtube-video-plugin
+data:
+  # Environment variables
+  YOUTUBE_DEFAULT_VIDEO_ID: ""
+  YOUTUBE_ALLOW_CUSTOM_URLS: "true"
+  YOUTUBE_SHOW_CONTROLS: "true"
+  YOUTUBE_AUTOPLAY: "false"
+  YOUTUBE_MUTED: "false"
+  YOUTUBE_MAX_WIDTH: "1200px"
+  YOUTUBE_DEFAULT_HEIGHT: "400"
+  YOUTUBE_ENABLE_TIMESTAMPS: "true"
+  YOUTUBE_SHOW_RELATED_VIDEOS: "false"
+  YOUTUBE_MODEST_BRANDING: "true"
+
+---
+# Example dynamic plugin configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dynamic-plugins-config
+  namespace: redhat-developer-hub
+  labels:
+    app: redhat-developer-hub
+    component: dynamic-plugins
+data:
+  dynamic-plugins.yaml: |
+    plugins:
+      - name: youtube-video
+        package: "@redhat-developer-hub/plugin-youtube-video"
+        config:
+          defaultVideoId: ""
+          allowCustomUrls: true
+          showControls: true
+          autoplay: false
+          muted: false
+          maxWidth: "1200px"
+          defaultHeight: 400
+          enableTimestamps: true
+          showRelatedVideos: false
+          modestBranding: true
+
+---
+# Example entity annotation for YouTube videos
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: example-component
+  description: Example component with YouTube video
+  annotations:
+    youtube.com/video-url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    youtube.com/video-title: "Example Video Title"
+    youtube.com/video-description: "This is an example video description"
+spec:
+  type: service
+  lifecycle: production
+  owner: team-a
+  system: example-system
+
+---
+# Example deployment with plugin configuration
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redhat-developer-hub
+  namespace: redhat-developer-hub
+  labels:
+    app: redhat-developer-hub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redhat-developer-hub
+  template:
+    metadata:
+      labels:
+        app: redhat-developer-hub
+    spec:
+      containers:
+        - name: redhat-developer-hub
+          image: quay.io/redhat-developer-hub/redhat-developer-hub:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: YOUTUBE_DEFAULT_VIDEO_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: youtube-video-plugin-env
+                  key: YOUTUBE_DEFAULT_VIDEO_ID
+            - name: YOUTUBE_ALLOW_CUSTOM_URLS
+              valueFrom:
+                configMapKeyRef:
+                  name: youtube-video-plugin-env
+                  key: YOUTUBE_ALLOW_CUSTOM_URLS
+            - name: YOUTUBE_SHOW_CONTROLS
+              valueFrom:
+                configMapKeyRef:
+                  name: youtube-video-plugin-env
+                  key: YOUTUBE_SHOW_CONTROLS
+            - name: YOUTUBE_AUTOPLAY
+              valueFrom:
+                configMapKeyRef:
+                  name: youtube-video-plugin-env
+                  key: YOUTUBE_AUTOPLAY
+            - name: YOUTUBE_MUTED
+              valueFrom:
+                configMapKeyRef:
+                  name: youtube-video-plugin-env
+                  key: YOUTUBE_MUTED
+          volumeMounts:
+            - name: dynamic-plugins-config
+              mountPath: /app/dynamic-plugins
+              readOnly: true
+      volumes:
+        - name: dynamic-plugins-config
+          configMap:
+            name: dynamic-plugins-config
+
+---
+# Example service for the plugin
+apiVersion: v1
+kind: Service
+metadata:
+  name: redhat-developer-hub
+  namespace: redhat-developer-hub
+  labels:
+    app: redhat-developer-hub
+spec:
+  selector:
+    app: redhat-developer-hub
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP
+
+---
+# Example ingress for external access
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: redhat-developer-hub
+  namespace: redhat-developer-hub
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: developer-hub.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: redhat-developer-hub
+                port:
+                  number: 80
